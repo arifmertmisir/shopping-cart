@@ -4,6 +4,7 @@ import Card from "../components/Card";
 
 function Shop() {
   const [productList, setProductList] = useState([]);
+  const [input, setInput] = useState({});
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -13,6 +14,28 @@ function Shop() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  function handleInputOnChange(e) {
+    const { name, value } = e.target;
+    setInput((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleIncrement(e) {
+    const { id } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [id]: (Number(prev[id]) || 0) + 1,
+    }));
+    console.log(input);
+  }
+
+  function handleDecrement(e) {
+    const { id } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [id]: Number(prev[id]) > 0 ? Number(prev[id]) - 1 : Number(prev[id]) || 0,
+    }));
+  }
 
   console.log(productList);
   return (
@@ -26,10 +49,15 @@ function Shop() {
         <div className="flex justify-center flex-wrap gap-8">
           {productList.map((product) => (
             <Card
+              id={product.title}
               key={product.id}
               title={product.title}
               image={product.image}
               description={product.description}
+              itemAmount={input[product.title]}
+              handleItemAmountOnChange={handleInputOnChange}
+              handleIncrement={handleIncrement}
+              handleDecrement={handleDecrement}
               price={product.price}
             />
           ))}
