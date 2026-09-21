@@ -1,13 +1,29 @@
 import { useOutletContext } from "react-router";
 
 function Cart() {
-  const { input } = useOutletContext();
+  const { input, setInput } = useOutletContext();
 
   const itemsInCart = Object.entries(input).filter(([key, val]) => val >= 1);
   console.log(itemsInCart);
 
+  function handleIncrement(e) {
+    const { id } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [id]: prev[id] + 1,
+    }));
+  }
+
+  function handleDecrement(e) {
+    const { id } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [id]: prev[id] > 0 ? prev[id] - 1 : prev[id],
+    }));
+  }
+
   return (
-    <div>
+    <>
       <h2 className="text-center mb-4 text-3xl font-bold text-indigo-800">
         Items in Your Cart:
       </h2>
@@ -26,12 +42,26 @@ function Cart() {
             >
               <p className="font-bold text-indigo-100">
                 {key}: {val}
+                <button
+                  id={key}
+                  onClick={handleIncrement}
+                  className="mx-2 rounded-lg p-1 bg-lime-400 hover:bg-lime-500 cursor-pointer"
+                >
+                  +
+                </button>
+                <button
+                  id={key}
+                  onClick={handleDecrement}
+                  className="rounded-lg p-1.25 bg-red-400 hover:bg-red-500 cursor-pointer"
+                >
+                  -
+                </button>
               </p>
             </div>
           ))
         )}
       </div>
-    </div>
+    </>
   );
 }
 export default Cart;
