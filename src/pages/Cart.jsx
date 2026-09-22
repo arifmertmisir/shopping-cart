@@ -30,7 +30,10 @@ function Cart() {
       <div className="mx-auto w-1/3 min-h-40 rounded-xl bg-indigo-600">
         {itemsInCart.length === 0 ? (
           <div className="flex flex-col justify-center items-center h-40">
-            <p className="font-bold text-indigo-100 p-2">
+            <p
+              data-testid="nothing-to-display"
+              className="font-bold text-indigo-100 p-2"
+            >
               Nothing to display in your Cart at the moment.
             </p>
           </div>
@@ -40,19 +43,24 @@ function Cart() {
               key={key}
               className="flex flex-col items-center justify-center p-2 gap-2 border-b-2 border-indigo-200 last:border-b-0"
             >
-              <p className="font-bold text-indigo-100">
+              <p
+                data-testid="display-products"
+                className="font-bold text-indigo-100"
+              >
                 {key}: {val}
                 <button
+                  data-testid="increment"
                   id={key}
                   onClick={handleIncrement}
-                  className="mx-2 rounded-lg p-1 bg-lime-400 hover:bg-lime-500 cursor-pointer"
+                  className="mx-2 w-6 h-6 rounded-lg bg-lime-400 hover:bg-lime-500 cursor-pointer"
                 >
                   +
                 </button>
                 <button
+                  data-testid="decrement"
                   id={key}
                   onClick={handleDecrement}
-                  className="rounded-lg p-1.25 bg-red-400 hover:bg-red-500 cursor-pointer"
+                  className="w-6 h-6 rounded-lg bg-red-400 hover:bg-red-500 cursor-pointer"
                 >
                   -
                 </button>

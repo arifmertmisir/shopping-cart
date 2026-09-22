@@ -31,14 +31,16 @@ function Card({
       <div className="flex justify-between p-2 mb-4 border-solid rounded-xl bg-indigo-100">
         <button
           id={title}
+          data-testid="increment"
           onClick={handleIncrement}
           className="hover:bg-lime-500 cursor-pointer"
         >
           +
         </button>
-        <p>{displayAmount}</p>
+        <p data-testid="item-amount-display">{displayAmount}</p>
         <button
           id={title}
+          data-testid="decrement"
           onClick={handleDecrement}
           className="hover:bg-red-600 cursor-pointer"
         >
