@@ -6,7 +6,6 @@ function Card({
   handleItemAmountOnChange,
   handleIncrement,
   handleDecrement,
-  //handleAddToCart,
   price,
 }) {
   const displayAmount = isNaN(itemAmount) ? 0 : itemAmount;
@@ -47,10 +46,7 @@ function Card({
           -
         </button>
       </div>
-      <button
-        //onClick={handleAddToCart}
-        className="p-2 mb-4 border-solid rounded-xl text-indigo-100 bg-indigo-900 hover:bg-lime-500 cursor-pointer"
-      >
+      <button className="p-2 mb-4 border-solid rounded-xl text-indigo-100 bg-indigo-900 hover:bg-lime-500 cursor-pointer">
         Add To Cart
       </button>
     </div>

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-function Navbar() {
+function Navbar({ itemsCount }) {
   return (
     <nav className="flex gap-4 text-lg font-medium justify-end">
       <NavLink
@@ -26,6 +26,11 @@ function Navbar() {
         to="/cart"
       >
         Cart
+        {itemsCount > 0 && (
+          <span className="p-0.5 mx-0.5 rounded-full bg-red-400 text-white font-bold">
+            {itemsCount}
+          </span>
+        )}
       </NavLink>
     </nav>
   );

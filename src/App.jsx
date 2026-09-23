@@ -4,10 +4,11 @@ import { useState } from "react";
 
 function App() {
   const [input, setInput] = useState({});
+  const itemsInCart = Object.entries(input).filter(([key, val]) => val >= 1);
 
   return (
     <>
-      <Navbar />
+      <Navbar itemsCount={itemsInCart.length} />
       <Outlet context={{ input, setInput }} />
     </>
   );

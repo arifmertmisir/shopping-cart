@@ -4,7 +4,6 @@ function Cart() {
   const { input, setInput } = useOutletContext();
 
   const itemsInCart = Object.entries(input).filter(([key, val]) => val >= 1);
-  console.log(itemsInCart);
 
   function handleIncrement(e) {
     const { id } = e.target;
@@ -60,7 +59,7 @@ function Cart() {
                   data-testid="decrement"
                   id={key}
                   onClick={handleDecrement}
-                  className="w-6 h-6 rounded-lg bg-red-400 hover:bg-red-500 cursor-pointer"
+                  className="w-6 h-6  bg-red-400 hover:bg-red-500 cursor-pointer"
                 >
                   -
                 </button>

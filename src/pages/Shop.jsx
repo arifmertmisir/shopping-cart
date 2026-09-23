@@ -26,7 +26,6 @@ function Shop() {
       ...prev,
       [id]: (Number(prev[id]) || 0) + 1,
     }));
-    console.log(input);
   }
 
   function handleDecrement(e) {
@@ -37,7 +36,6 @@ function Shop() {
     }));
   }
 
-  console.log(productList);
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <h2 className="text-3xl font-bold text-indigo-800">
