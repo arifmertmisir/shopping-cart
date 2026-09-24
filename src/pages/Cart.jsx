@@ -26,7 +26,7 @@ function Cart() {
       <h2 className="text-center mb-4 text-3xl font-bold text-indigo-800">
         Items in Your Cart:
       </h2>
-      <div className="mx-auto w-1/3 min-h-40 rounded-xl bg-indigo-600">
+      <div className="mx-auto px-2 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 min-h-40 rounded-xl bg-indigo-600">
         {itemsInCart.length === 0 ? (
           <div className="flex flex-col justify-center items-center h-40">
             <p
@@ -59,7 +59,7 @@ function Cart() {
                   data-testid="decrement"
                   id={key}
                   onClick={handleDecrement}
-                  className="w-6 h-6  bg-red-400 hover:bg-red-500 cursor-pointer"
+                  className="w-6 h-6  bg-red-400 rounded-lg hover:bg-red-500 cursor-pointer"
                 >
                   -
                 </button>
