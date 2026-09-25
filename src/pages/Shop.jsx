@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Card from "../components/Card";
 import { useOutletContext } from "react-router";
 
 function Shop() {
-  const [productList, setProductList] = useState([]);
-  const { input, setInput } = useOutletContext();
+  const { productList, setProductList, input, setInput } = useOutletContext();
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")

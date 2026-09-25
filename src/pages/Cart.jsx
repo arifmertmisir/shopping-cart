@@ -1,9 +1,14 @@
 import { useOutletContext } from "react-router";
 
 function Cart() {
-  const { input, setInput } = useOutletContext();
+  const { input, setInput, productList } = useOutletContext();
 
   const itemsInCart = Object.entries(input).filter(([key, val]) => val >= 1);
+
+  const totalAmount = itemsInCart.reduce((sum, [title, amount]) => {
+    const product = productList.find((product) => product.title === title);
+    return sum + (product ? product.price * amount : 0);
+  }, 0);
 
   function handleIncrement(e) {
     const { id } = e.target;
@@ -67,6 +72,7 @@ function Cart() {
             </div>
           ))
         )}
+        <p className="text-center p-2 sm:p-4 font-bold text-lg sm:text-xl text-yellow-400">{`Total: €${totalAmount.toFixed(2)}`}</p>
       </div>
     </>
   );
