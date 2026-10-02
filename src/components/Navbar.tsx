@@ -1,6 +1,11 @@
 import { NavLink } from "react-router";
+import type { JSX } from "react";
 
-function Navbar({ itemsCount }) {
+type NavbarProps = {
+  itemsCount:number,
+}
+
+function Navbar({ itemsCount }:NavbarProps):JSX.Element {
   return (
     <nav className="flex gap-4 sm:gap-6 text-base sm:text-lg font-medium justify-end items-center px-4 py-3 shadow-md">
       <NavLink

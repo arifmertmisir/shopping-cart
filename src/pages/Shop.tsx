@@ -1,9 +1,17 @@
 import { useEffect } from "react";
 import Card from "../components/Card";
 import { useOutletContext } from "react-router";
+import type { JSX } from "react";
+import type { Product } from "../types/Product"
+import type { CartContextType } from "../types/CartContextType";
 
-function Shop() {
-  const { productList, setProductList, input, setInput } = useOutletContext();
+type ShopContextType = CartContextType & 
+                { setProductList: React.Dispatch<React.SetStateAction<Product[]>>; }
+
+function Shop():JSX.Element {
+  const { productList, setProductList, input, setInput }
+                           = useOutletContext<ShopContextType>();
+
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -14,22 +22,22 @@ function Shop() {
       .catch((error) => console.error(error));
   }, []);
 
-  function handleInputOnChange(e) {
+  function handleInputOnChange(e:React.ChangeEvent<HTMLInputElement>):void {
     const { name, value } = e.target;
-    setInput((prev) => ({ ...prev, [name]: value }));
+    setInput((prev:Record<string, number>):Record<string, number> => ({ ...prev, [name]: Number(value) }));
   }
 
-  function handleIncrement(e) {
-    const { id } = e.target;
-    setInput((prev) => ({
+  function handleIncrement(e:React.MouseEvent<HTMLButtonElement>):void {
+    const { id } = e.currentTarget;
+    setInput((prev:Record<string, number>):Record<string, number> => ({
       ...prev,
       [id]: (Number(prev[id]) || 0) + 1,
     }));
   }
 
-  function handleDecrement(e) {
-    const { id } = e.target;
-    setInput((prev) => ({
+  function handleDecrement(e:React.MouseEvent<HTMLButtonElement>):void {
+    const { id } = e.currentTarget;
+    setInput((prev:Record<string, number>):Record<string, number> => ({
       ...prev,
       [id]: Number(prev[id]) > 0 ? Number(prev[id]) - 1 : Number(prev[id]) || 0,
     }));
@@ -44,7 +52,6 @@ function Shop() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-8 px-2">
         {productList.map((product) => (
           <Card
-            id={product.title}
             key={product.id}
             title={product.title}
             image={product.image}

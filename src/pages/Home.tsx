@@ -1,6 +1,7 @@
 import shoppingCartImage from "../assets/undraw_add-to-cart_vx87.svg";
+import type { JSX } from "react";
 
-function Home() {
+function Home():JSX.Element {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <h2 className="text-3xl font-bold text-indigo-800">

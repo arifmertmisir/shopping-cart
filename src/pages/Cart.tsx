@@ -1,26 +1,29 @@
 import { useOutletContext } from "react-router";
+import type { JSX } from "react";
+import type { Product } from "../types/Product"
+import type { CartContextType } from "../types/CartContextType"
 
-function Cart() {
-  const { input, setInput, productList } = useOutletContext();
+function Cart():JSX.Element {
+  const { input, setInput, productList } = useOutletContext<CartContextType>();
 
-  const itemsInCart = Object.entries(input).filter(([key, val]) => val >= 1);
+  const itemsInCart:[string, number][] = Object.entries(input).filter(([key, val]) => val >= 1);
 
-  const totalAmount = itemsInCart.reduce((sum, [title, amount]) => {
-    const product = productList.find((product) => product.title === title);
+  const totalAmount:number = itemsInCart.reduce((sum:number, [title, amount]:[string, number]):number => {
+    const product:Product | undefined = productList.find((product:Product):boolean => product.title === title);
     return sum + (product ? product.price * amount : 0);
   }, 0);
 
-  function handleIncrement(e) {
-    const { id } = e.target;
-    setInput((prev) => ({
+  function handleIncrement(e:React.MouseEvent<HTMLButtonElement>):void {
+    const { id } = e.currentTarget;
+    setInput((prev:Record<string, number>):Record<string, number> => ({
       ...prev,
       [id]: prev[id] + 1,
     }));
   }
 
-  function handleDecrement(e) {
-    const { id } = e.target;
-    setInput((prev) => ({
+  function handleDecrement(e:React.MouseEvent<HTMLButtonElement>):void {
+    const { id } = e.currentTarget;
+    setInput((prev:Record<string, number>):Record<string, number> => ({
       ...prev,
       [id]: prev[id] > 0 ? prev[id] - 1 : prev[id],
     }));

@@ -1,3 +1,16 @@
+import type {JSX} from "react";
+
+type CardProps = {
+  title:string,
+  image:string,
+  description:string,
+  itemAmount:number,
+  handleItemAmountOnChange:(e:React.ChangeEvent<HTMLInputElement>) => void,
+  handleIncrement:(e:React.MouseEvent<HTMLButtonElement>) => void,
+  handleDecrement:(e:React.MouseEvent<HTMLButtonElement>) => void,
+  price:number,
+}
+
 function Card({
   title,
   image,
@@ -7,8 +20,8 @@ function Card({
   handleIncrement,
   handleDecrement,
   price,
-}) {
-  const displayAmount = isNaN(itemAmount) ? 0 : itemAmount;
+}:CardProps):JSX.Element {
+  const displayAmount:number = isNaN(itemAmount) ? 0 : itemAmount;
   return (
     <div className="text-center font-medium shadow-[0px_10px_20px_rgba(0,0,1,1)] rounded-xl bg-indigo-600 cursor-pointer duration-300 transition-transform hover:-translate-y-2.5 hover:scale-105 hover:shadow-[0px_20px_80px_rgba(255,203,5,0.4)] hover:bg-indigo-400">
       <h2 className="p-2 font-bold text-indigo-100">{title}</h2>
